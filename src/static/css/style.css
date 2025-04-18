@@ -1,0 +1,217 @@
+/* Styles personnalisés pour l'application PartnerCompensation */
+
+/* Variables de couleurs */
+:root {
+  --primary: hsl(222.2, 47.4%, 11.2%);
+  --primary-light: hsla(222.2, 47.4%, 11.2%, 0.1);
+  --secondary: #42A5F5;
+  --secondary-light: #90CAF9;
+  --success: #4CAF50;
+  --success-light: rgba(76, 175, 80, 0.1);
+  --warning: #FFC107;
+  --warning-light: rgba(255, 193, 7, 0.1);
+  --danger: #F44336;
+  --danger-light: rgba(244, 67, 54, 0.1);
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+  --white: #FFFFFF;
+  --border-radius: 0.5rem;
+}
+
+/* Styles généraux */
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--gray-900);
+  background-color: var(--gray-50);
+}
+
+/* En-têtes */
+.main-header {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.sub-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.blue-text {
+  color: var(--primary);
+}
+
+/* Cartes */
+.card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #2E7D32;
+}
+
+.badge-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #F57F17;
+}
+
+.badge-danger {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #D32F2F;
+}
+
+/* Tableaux */
+.stDataFrame {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.stDataFrame th {
+  background-color: var(--gray-50);
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.stDataFrame td, .stDataFrame th {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+/* Boutons */
+.stButton > button {
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.stButton > button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Onglets */
+.stTabs [data-baseweb="tab-list"] {
+  gap: 1px;
+}
+
+.stTabs [data-baseweb="tab"] {
+  height: 3rem;
+  white-space: pre-wrap;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+
+.stTabs [aria-selected="true"] {
+  background-color: var(--white);
+  color: var(--primary);
+  border-top: 2px solid var(--primary);
+}
+
+/* Formulaires */
+.stTextInput > div > div > input, 
+.stNumberInput > div > div > input,
+.stSelectbox > div > div,
+.stMultiselect > div > div {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-300);
+  padding: 0.5rem 0.75rem;
+}
+
+.stTextInput > div > div > input:focus, 
+.stNumberInput > div > div > input:focus,
+.stSelectbox > div > div:focus,
+.stMultiselect > div > div:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+/* Expanders */
+.streamlit-expanderHeader {
+  font-weight: 500;
+  color: var(--gray-800);
+  background-color: var(--gray-50);
+  border-radius: var(--border-radius);
+}
+
+/* Métriques */
+.stMetric {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.stMetric label {
+  font-weight: 500;
+  color: var(--gray-500);
+}
+
+.stMetric [data-testid="stMetricValue"] {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+/* Graphiques */
+.stPlotlyChart {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+/* Séparateurs */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--gray-200);
+  margin: 2rem 0;
+}
+
+/* Alertes */
+.stAlert {
+  border-radius: var(--border-radius);
+}
+
+/* Mise en page responsive */
+@media (max-width: 768px) {
+  .main-header {
+    font-size: 1.5rem;
+  }
+  
+  .sub-header {
+    font-size: 1.25rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+}
