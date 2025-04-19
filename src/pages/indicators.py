@@ -153,7 +153,7 @@ def display_all_indicators(indicators, nb_patients, has_ipa_in_structure):
     
     # Affichage des indicateurs socles et prérequis
     for indicator in socle_indicators:
-        display_indicator(indicator, nb_patients, has_ipa_in_structure)
+        display_indicator(indicator, nb_patients, has_ipa_in_structure, tab="all")
     
     # Affichage des indicateurs socles non prérequis
     st.markdown("<h3 class='blue-text'>Indicateurs socles</h3>", unsafe_allow_html=True)
@@ -163,7 +163,7 @@ def display_all_indicators(indicators, nb_patients, has_ipa_in_structure):
     
     # Affichage des indicateurs socles non prérequis
     for indicator in socle_non_prerequisite_indicators:
-        display_indicator(indicator, nb_patients, has_ipa_in_structure)
+        display_indicator(indicator, nb_patients, has_ipa_in_structure, tab="all")
     
     # Affichage des indicateurs optionnels
     st.markdown("<h3 class='blue-text'>Indicateurs optionnels</h3>", unsafe_allow_html=True)
@@ -173,7 +173,7 @@ def display_all_indicators(indicators, nb_patients, has_ipa_in_structure):
     
     # Affichage des indicateurs optionnels
     for indicator in optional_indicators:
-        display_indicator(indicator, nb_patients, has_ipa_in_structure)
+        display_indicator(indicator, nb_patients, has_ipa_in_structure, tab="all")
 
 def display_axis_indicators(indicators, axis, nb_patients, has_ipa_in_structure):
     """
@@ -198,7 +198,7 @@ def display_axis_indicators(indicators, axis, nb_patients, has_ipa_in_structure)
     
     # Affichage des indicateurs socles et prérequis
     for indicator in socle_indicators:
-        display_indicator(indicator, nb_patients, has_ipa_in_structure)
+        display_indicator(indicator, nb_patients, has_ipa_in_structure, tab=f"axe{axis}")
     
     # Affichage des indicateurs socles non prérequis
     st.markdown("<h3 class='blue-text'>Indicateurs socles</h3>", unsafe_allow_html=True)
@@ -208,7 +208,7 @@ def display_axis_indicators(indicators, axis, nb_patients, has_ipa_in_structure)
     
     # Affichage des indicateurs socles non prérequis
     for indicator in socle_non_prerequisite_indicators:
-        display_indicator(indicator, nb_patients, has_ipa_in_structure)
+        display_indicator(indicator, nb_patients, has_ipa_in_structure, tab=f"axe{axis}")
     
     # Affichage des indicateurs optionnels
     st.markdown("<h3 class='blue-text'>Indicateurs optionnels</h3>", unsafe_allow_html=True)
@@ -218,11 +218,17 @@ def display_axis_indicators(indicators, axis, nb_patients, has_ipa_in_structure)
     
     # Affichage des indicateurs optionnels
     for indicator in optional_indicators:
-        display_indicator(indicator, nb_patients, has_ipa_in_structure)
+        display_indicator(indicator, nb_patients, has_ipa_in_structure, tab=f"axe{axis}")
 
-def display_indicator(indicator, nb_patients, has_ipa_in_structure):
+def display_indicator(indicator, nb_patients, has_ipa_in_structure, tab="all"):
     """
     Affiche un indicateur avec ses contrôles
+    
+    Args:
+        indicator: L'indicateur à afficher
+        nb_patients: Le nombre de patients médecin traitant
+        has_ipa_in_structure: Indique si la structure a un IPA
+        tab: L'onglet dans lequel l'indicateur est affiché (pour éviter les doublons de clés)
     """
     # Création d'un expander pour l'indicateur
     with st.expander(f"{indicator.id} - {indicator.name}"):
@@ -251,7 +257,7 @@ def display_indicator(indicator, nb_patients, has_ipa_in_structure):
                     "Niveau de complétion",
                     options=list(range(indicator.max_level + 1)),
                     index=indicator.completion_status,
-                    key=f"completion_status_{indicator.id}",
+                    key=f"completion_status_{indicator.id}_{tab}",
                     horizontal=True,
                     format_func=lambda x: f"Niveau {x}" if x > 0 else "Non complété"
                 )
@@ -260,7 +266,7 @@ def display_indicator(indicator, nb_patients, has_ipa_in_structure):
                 indicator.completion_status = 1 if st.checkbox(
                     "Indicateur complété",
                     value=indicator.completion_status == 1,
-                    key=f"completion_status_{indicator.id}"
+                    key=f"completion_status_{indicator.id}_{tab}"
                 ) else 0
             
             # Pour les indicateurs avec pourcentage de complétion
@@ -270,7 +276,7 @@ def display_indicator(indicator, nb_patients, has_ipa_in_structure):
                     min_value=0,
                     max_value=100,
                     value=indicator.completion_percentage,
-                    key=f"completion_percentage_{indicator.id}"
+                    key=f"completion_percentage_{indicator.id}_{tab}"
                 )
             
             # Cas spécifiques pour certains indicateurs

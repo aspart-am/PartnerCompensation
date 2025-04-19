@@ -16,13 +16,16 @@ with open('src/static/css/style.css', 'r') as f:
     css = f.read()
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
+# Import des fonctions de chargement des données
+from src.utils.data_manager import load_indicators, load_associates, load_expenses
+
 # Initialisation des données de session si elles n'existent pas
 if 'indicators' not in st.session_state:
-    st.session_state.indicators = {}
+    st.session_state.indicators = load_indicators()
 if 'associates' not in st.session_state:
-    st.session_state.associates = []
+    st.session_state.associates = load_associates()
 if 'expenses' not in st.session_state:
-    st.session_state.expenses = []
+    st.session_state.expenses = load_expenses()
 
 # Barre latérale pour la navigation
 st.sidebar.markdown("<h1 class='blue-text'>Gestion SISA</h1>", unsafe_allow_html=True)
